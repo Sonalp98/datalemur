@@ -71,7 +71,7 @@
 
 -- Explanation:
 
--- Order 727424 is excluded from the analysis as it was placed after the first 14 days upon signing up.
+-- Order 727424 is excluded from the analysis as signup month=5.
 
 -- Out of the remaining orders, there are a total of 4 orders. 
 -- However, only 3 of these orders resulted in a bad experience, as one order with ID 253613 was completed successfully. 
