@@ -124,3 +124,7 @@ where month(signup_timestamp)=6 and (order_timestamp <= signup_timestamp + INTER
 select sum(case when status !='completed successfully' or actual_delivery_timestamp > estimated_delivery_timestamp 
                                        or actual_delivery_timestamp is null  then 1 else 0 end )*100/count(*) as pct
 from cte;
+
+-- or select 100-sum(case when status ='completed successfully'  and actual_delivery_timestamp < estimated_delivery_timestamp then 1 else 0 end )*100/count(*) 
+-- as pct
+from cte;
