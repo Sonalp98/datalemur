@@ -1,4 +1,5 @@
--- The strategy team in Airbnb is trying to analyze the impact of Covid-19 during 2021. To do so, they need you to write a query that outputs the average vacant days across the AirBnbs in 2021.
+-- The strategy team in Airbnb is trying to analyze the impact of Covid-19 during 2021. To do so, they need you to write a query that 
+--   outputs the average vacant days across the AirBnbs in 2021.
 
 -- Some properties have gone out of business, so you should only analyze rentals that are currently active. Round the results to a whole number.
 
@@ -41,14 +42,14 @@
 -- Example Output:
 
 -- avg_vacant_days
--- 354.5
+-- 355
 
 -- Explanation:
 
 -- Property 1 was rented for 8 days, thus the property has 365 - 8 = 357 vacant days.
 -- Property 2 is excluded as it is not active.
--- Property 3 was rented out for 13 days, thus the property as 365 - 13 = 352 vacant days.
--- Average vacant days are 355 days. (357 + 352 / 2).
+-- Property 3 was rented out for 13 days, thus the property as 365 - 12 = 353 vacant days.
+-- Average vacant days are 355 days. (357 + 353 / 2).
 
 drop table if exists bookings;
 create table bookings( listing_id	integer,
@@ -70,8 +71,8 @@ select distinct b.listing_id,365-sum(datediff(checkout_date,checkin_date)) over(
 from bookings b
 join listings l
 on b.listing_id=l.listing_id
-where is_active=1)
-select avg(no_of_vacant_days) as avg_vacant_days from cte;
+where is_active=1 and year(checkin_date)='2021')
+select round(avg(no_of_vacant_days)) as avg_vacant_days from cte;
 
 --Using group by
 
@@ -79,6 +80,6 @@ with cte as(select b.listing_id,365-sum(datediff(checkout_date,checkin_date)) as
 from bookings b
 join listings l
 on b.listing_id=l.listing_id
-where is_active=1
+where is_active=1 and year(checkin_date)='2021'
 group by b.listing_id)
-select avg(no_of_vacant_days) as avg_vacant_days from cte;
+select round(avg(no_of_vacant_days)) as avg_vacant_days from cte;
