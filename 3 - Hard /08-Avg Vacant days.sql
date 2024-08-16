@@ -48,7 +48,7 @@
 
 -- Property 1 was rented for 8 days, thus the property has 365 - 8 = 357 vacant days.
 -- Property 2 is excluded as it is not active.
--- Property 3 was rented out for 13 days, thus the property as 365 - 12 = 353 vacant days.
+-- Property 3 was rented out for 12 days, thus the property as 365 - 12 = 353 vacant days. * it should be 13 days can't understand here
 -- Average vacant days are 355 days. (357 + 353 / 2).
 
 drop table if exists bookings;
